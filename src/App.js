@@ -6,9 +6,10 @@ import './Components/CSS/ToDo.css';
 
 function App() {
   return (
-      <>
+      <div className={"text-center mt-5"}>
+          <Header />
           <ToDo />
-      </>
+      </div>
   );
 }
 

@@ -1,14 +1,40 @@
-import React from "react";
-import './CSS/ToDo.css'
+import './CSS/ToDo.css';
+import {useDispatch} from "react-redux";
 
-export default class todoItem extends React.Component {
-    render() {
-        return (
-            <div id={"to-do-item"} className={"mr-auto ml-auto w-50 p-3 d-flex"}>
-                {this.props.completed ? <input defaultChecked={true} onInput={() => this.props.complete(this.props.children)} type={"checkbox"} /> : <input onInput={() => this.props.complete(this.props.children)} type={"checkbox"} />}
-                <div className={"ml-3"}>{this.props.children}</div>
-                <span onClick={() => this.props.delete(this.props.children)} className={"ml-auto"} ><i className="fa fa-times" /></span>
-            </div>
-        )
+
+const ToDoItem = props => {
+
+    const dispatch = useDispatch();
+
+    const changeState = task => {
+
+        // Task was completed, we need to undo this task
+        if (task.state === 'completed') {
+            dispatch({
+                type: "UNCOMPLETED_TASK",
+                payload: {
+                    text: task.text,
+                    state: "not_completed"
+                }
+            });
+        } else {
+            dispatch({
+                type: "COMPLETE_TASK",
+                payload: {
+                    text: task.text,
+                    state: "completed"
+                }
+            });
+        }
     }
+
+    console.log(props.children)
+    return (
+        <div className={"col-12 d-flex justify-content-center m-0"}>
+            <input defaultChecked= {props.children.state === "completed"} onChange={() => changeState(props.children)} className={"ms-3"} type={"checkbox"} />
+            <div className={`p-3`}>{props.children.text}</div>
+        </div>
+    )
 }
+
+export default ToDoItem;
