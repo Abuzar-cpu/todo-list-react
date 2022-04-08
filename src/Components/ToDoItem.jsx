@@ -28,11 +28,10 @@ const ToDoItem = props => {
         }
     }
 
-    console.log(props.children)
     return (
         <div className={"col-12 d-flex justify-content-center m-0"}>
-            <input defaultChecked= {props.children.state === "completed"} onChange={() => changeState(props.children)} className={"ms-3"} type={"checkbox"} />
-            <div className={`p-3`}>{props.children.text}</div>
+            <input checked = {props.completed} onChange={() => changeState(props.children)} className={"ms-3"} type={"checkbox"} />
+            <div className={`p-3 todo-item`} id={props.completed ? "completed-item" : null}>{props.children.text}</div>
         </div>
     )
 }

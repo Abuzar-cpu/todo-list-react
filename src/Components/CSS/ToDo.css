@@ -1,0 +1,18 @@
+#header {
+    color: rgba(175, 47, 47, 0.35);
+    font-weight: bold;
+}
+
+#completed-item {
+    text-decoration-line: line-through;
+}
+
+.todo-item {
+    font-weight: bold;
+}
+
+#active {
+    background-color: red;
+    font-weight: bold;
+    border: none;
+}

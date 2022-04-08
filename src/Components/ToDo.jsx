@@ -16,12 +16,14 @@ const ToDo = props => {
             if (todo.completed.length === 0) {
                 return <p>No completed tasks</p>
             }
-            return todo.completed.map((item, idx) => <ToDoItem key={idx}>{item}</ToDoItem>);
+            return todo.completed.map((item, idx) => <ToDoItem completed={true} key={idx}>{item}</ToDoItem>);
         } else if (state === "pending") {
             if (todo.pending.length === 0) {
                 return <p>No pending tasks</p>
             }
-            return todo.pending.map((item, idx) => <ToDoItem key={idx}>{item}</ToDoItem>);
+            return todo.pending.map((item, idx) => <ToDoItem completed={false} key={idx}>{item}</ToDoItem>);
+        } else {
+            return <p>No tasks</p>
         }
     }
 
@@ -35,13 +37,13 @@ const ToDo = props => {
                 });
                 inpRef.current.value = "";
             }}>
-                <input className={"form-control w-50"} ref={inpRef} type="text" placeholder="Add new todo"/>
+                <div className={"d-flex justify-content-center mt-5"}><input className={"form-control w-50 px-2 py-3"} ref={inpRef} type="text" placeholder="Add new todo"/></div>
             </form>
 
             <div className="todo-list">
                 <div className="todo-list-header">
-                    <button className={"btn btn-primary mt-3"} onClick={() => setActivePage("pending")}>Pending</button>
-                    <button className={"btn btn-primary ms-3 mt-3"}
+                    <button id={activePage === "pending" ? "active" : null} className={"btn btn-primary mt-3"} onClick={() => setActivePage("pending")}>Pending</button>
+                    <button id={activePage === "completed" ? "active" : null} className={"btn btn-primary ms-3 mt-3"}
                             onClick={() => setActivePage("completed")}>Completed
                     </button>
                 </div>

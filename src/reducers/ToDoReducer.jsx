@@ -1,6 +1,6 @@
 const initialState = {
     completed: [],
-    pending: [],
+    pending: []
 }
 
 const ToDoReducer = (state = initialState, action) => {
